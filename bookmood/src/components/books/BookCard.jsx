@@ -1,4 +1,4 @@
-function BookCard({ book, onSave, isSaved = false }) {
+function BookCard({ book, onSave, isSaved = false, matchScore }) {
   if (!book) {
     return null
   }
@@ -50,6 +50,12 @@ function BookCard({ book, onSave, isSaved = false }) {
       </div>
 
       <div className="book-card__content">
+        {typeof matchScore === 'number' && (
+          <div className="book-card__match-score" aria-label={`${matchScore}% match`}>
+            {matchScore}% Match
+          </div>
+        )}
+
         <div className="book-card__header">
           <div>
             <h3 className="book-card__title">{book.title || 'Untitled'}</h3>

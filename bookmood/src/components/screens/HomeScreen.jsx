@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { searchBooks } from '../../api/googleBooks'
+import { searchBooks } from '../../api/googlebooks'
 import BookCard from '../books/BookCard'
 
-function HomeScreen() {
+function HomeScreen({ onFindBook }) {
   const [searchTerm, setSearchTerm] = useState('')
   const [books, setBooks] = useState([])
   const [loading, setLoading] = useState(false)
@@ -65,7 +65,11 @@ function HomeScreen() {
           </p>
 
           <div className="cta-group">
-            <button type="button" className="primary-button">
+            <button
+              type="button"
+              className="primary-button"
+              onClick={onFindBook}
+            >
               Find My Book
             </button>
           </div>
