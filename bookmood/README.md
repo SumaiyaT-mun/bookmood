@@ -10,7 +10,7 @@ user's preferences.
 
 ## Live Demo
 
-[View Booklyn Live](YOUR_LIVE_URL)
+Link: https://booklynn.vercel.app/
 
 ## Features
 
