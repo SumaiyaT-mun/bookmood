@@ -1,23 +1,70 @@
-# Booklyn
+# Booklyn 📚
 
-A personalized book recommendation app that helps users discover
-books based on their mood, preferred genre, and reading length.
+Booklyn is a personalized book discovery application that helps
+readers find their next book based on how they feel, what genre
+they enjoy, and how much time they want to spend reading.
+
+The application uses the Google Books API to retrieve real book
+data and provides personalized recommendations based on the
+user's preferences.
 
 ## Live Demo
 
-[Booklyn Live Demo](YOUR_VERCEL_URL)
+[View Booklyn Live](YOUR_LIVE_URL)
 
 ## Features
 
-- Mood-based book recommendations
-- Genre selection
-- Reading-length preferences
-- Google Books API integration
-- Personalized recommendation matching
-- Book details page
-- Save books for later
-- Responsive design
-- Accessible keyboard-friendly controls
+- 📚 Personalized book recommendations
+- 🌙 Mood-based recommendations
+- 🏷️ Genre selection
+- 📖 Reading-length preference
+- 🔎 Google Books API search
+- ⭐ Book ratings and metadata
+- 📄 Dedicated book details page
+- ❤️ Save books for later
+- 💾 Saved books persist using localStorage
+- ↩️ Navigation between recommendation and detail screens
+- 📱 Responsive design for desktop and mobile
+- ♿ Keyboard-accessible interactive controls
+
+---
+
+## How It Works
+
+### 1. Choose your preferences
+
+Users select:
+
+- Mood
+- Genre
+- Reading length
+
+### 2. Get recommendations
+
+Booklyn uses the selected preferences to generate a list of
+recommended books using data retrieved from the Google Books API.
+
+### 3. Explore a book
+
+Users can open a dedicated details page to see:
+
+- Book cover
+- Title
+- Author
+- Description
+- Rating
+- Publication information
+- Page count
+- Categories
+
+### 4. Save books
+
+Users can save books they are interested in.
+
+Saved books are stored locally in the browser using `localStorage`,
+so they remain available after refreshing the page.
+
+---
 
 ## Tech Stack
 
@@ -27,42 +74,38 @@ books based on their mood, preferred genre, and reading length.
 - React Router
 - Google Books API
 - CSS
-- LocalStorage
+- Browser localStorage
 
-## Getting Started
+---
 
-### Install dependencies
+## Project Structure
 
-npm install
-
-### Environment Variables
-
-Create a `.env` file:
-
-VITE_GOOGLE_BOOKS_API_KEY=your_api_key_here
-
-### Run locally
-
-npm run dev
-
-## AI-Assisted Development
-
-AI tools were used throughout development as a development
-assistant for scaffolding, implementation, debugging, and
-refactoring.
-
-See [PROMPTS.md](PROMPTS.md) for the development prompts used.
-
-## Manual Improvements
-
-AI-generated code was reviewed manually throughout development.
-
-Examples include:
-
-- Correcting accessibility semantics for preference selectors.
-- Improving the recommendation card layout.
-- Moving the back navigation to a clearer position.
-- Refining responsive behavior at mobile widths.
-- Reviewing and correcting saved-book behavior.
-- Making product and navigation decisions based on usability
-  rather than blindly accepting generated implementations.
+```text
+src/
+├── api/
+│   └── googleBooks.js
+│
+├── components/
+│   ├── common/
+│   ├── layout/
+│   ├── preferences/
+│   ├── books/
+│   └── screens/
+│
+├── data/
+│   ├── moodOptions.js
+│   ├── genreOptions.js
+│   └── readingPreferenceOptions.js
+│
+├── hooks/
+│   └── useSavedBooks.js
+│
+├── lib/
+│   └── recommendation.js
+│
+├── utils/
+│   └── storage.js
+│
+├── App.jsx
+├── App.css
+└── main.jsx
