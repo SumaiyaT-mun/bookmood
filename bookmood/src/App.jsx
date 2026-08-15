@@ -1,16 +1,20 @@
 import { useState } from 'react'
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
 import './App.css'
 import HomeScreen from './components/screens/HomeScreen'
 import PreferenceForm from './components/preferences/PreferenceForm'
 import ResultsScreen from './components/screens/ResultsScreen'
+import SavedBooksScreen from './components/screens/SavedBooksScreen'
+import BookDetailsScreen from './components/screens/BookDetailsScreen'
 import { moodOptions } from './data/moodOptions'
 import { genreOptions } from './data/genreOptions'
 import { readingPreferenceOptions } from './data/readingPreferenceOptions'
 import { searchBooks } from './api/googlebooks'
 import { rankBooks } from './lib/recommendation'
+import Header from './components/layout/Header'
 
 function App() {
-  const [screen, setScreen] = useState('home')
+  const navigate = useNavigate()
   const [preferences, setPreferences] = useState({
     mood: '',
     genre: '',
@@ -21,7 +25,7 @@ function App() {
   const [error, setError] = useState('')
 
   const handleFindBook = () => {
-    setScreen('preferences')
+    navigate('/preferences')
   }
 
   const handlePreferenceSubmit = async (selectedPreferences) => {
@@ -36,7 +40,7 @@ function App() {
 
       if (!query) {
         setBooks([])
-        setScreen('results')
+        navigate('/results')
         return
       }
 
@@ -44,7 +48,7 @@ function App() {
       const rankedBooks = rankBooks(results, nextPreferences)
 
       setBooks(rankedBooks)
-      setScreen('results')
+      navigate('/results')
     } catch (err) {
       setBooks([])
       setError(
@@ -52,35 +56,46 @@ function App() {
           ? err.message
           : 'Something went wrong while fetching your recommendations.',
       )
-      setScreen('results')
+      navigate('/results')
     } finally {
       setLoading(false)
     }
   }
 
-  if (screen === 'preferences') {
-    return (
-      <PreferenceForm
-        moodOptions={moodOptions}
-        genreOptions={genreOptions}
-        readingPreferenceOptions={readingPreferenceOptions}
-        onSubmit={handlePreferenceSubmit}
-      />
-    )
-  }
-
-  if (screen === 'results') {
-    return (
-      <ResultsScreen
-        books={books}
-        loading={loading}
-        error={error}
-        onBack={() => setScreen('home')}
-      />
-    )
-  }
-
-  return <HomeScreen onFindBook={handleFindBook} />
+  return (
+    <>
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomeScreen onFindBook={handleFindBook} />} />
+        <Route
+          path="/preferences"
+          element={
+            <PreferenceForm
+              moodOptions={moodOptions}
+              genreOptions={genreOptions}
+              readingPreferenceOptions={readingPreferenceOptions}
+              onSubmit={handlePreferenceSubmit}
+              onBack={() => navigate('/')}
+            />
+          }
+        />
+        <Route
+          path="/results"
+          element={
+            <ResultsScreen
+              books={books}
+              loading={loading}
+              error={error}
+              onBack={() => navigate('/preferences')}
+            />
+          }
+        />
+        <Route path="/saved-books" element={<SavedBooksScreen />} />
+        <Route path="/books/:bookId" element={<BookDetailsScreen books={books} />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </>
+  )
 }
 
 export default App

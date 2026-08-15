@@ -35,18 +35,18 @@ export async function searchBooks(query) {
     const saleInfo = item?.saleInfo ?? {}
 
     return {
-     id: item?.id ?? '',
-     title: volumeInfo.title ?? 'Untitled',
-     authors: Array.isArray(volumeInfo.authors) ? volumeInfo.authors : [],
-     description: volumeInfo.description ?? '',
-     thumbnail: imageLinks.thumbnail ?? imageLinks.smallThumbnail ?? '',
-     publishedDate: volumeInfo.publishedDate ?? '',
-     pageCount: volumeInfo.pageCount ?? 0,
-     categories: Array.isArray(volumeInfo.categories)
-    ? volumeInfo.categories
-    : [],
-     averageRating: volumeInfo.averageRating ?? 0,
-     ratingsCount: volumeInfo.ratingsCount ?? 0,
-   }
+      id: item?.id ?? '',
+      title: volumeInfo.title ?? 'Untitled',
+      authors: Array.isArray(volumeInfo.authors) ? volumeInfo.authors : [],
+      description: volumeInfo.description ?? '',
+      thumbnail: imageLinks.thumbnail ?? imageLinks.smallThumbnail ?? '',
+      publishedDate: volumeInfo.publishedDate ?? '',
+      pageCount: volumeInfo.pageCount ?? 0,
+      categories: Array.isArray(volumeInfo.categories) ? volumeInfo.categories : [],
+      averageRating: volumeInfo.averageRating ?? 0,
+      ratingsCount: volumeInfo.ratingsCount ?? 0,
+      previewLink: volumeInfo.previewLink ?? '',
+      infoLink: volumeInfo.infoLink ?? '',
+    }
   })
 }

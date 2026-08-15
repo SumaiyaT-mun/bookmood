@@ -3,7 +3,7 @@ function MoodSelector({ options = [], value, onChange }) {
     <fieldset className="mood-selector">
       <legend className="mood-selector__legend">Choose your mood</legend>
 
-      <div className="mood-selector__options" role="radiogroup" aria-label="Reading mood options">
+      <div className="mood-selector__options" aria-label="Reading mood options">
         {options.map((option) => {
           const isSelected = value === option.id
 
@@ -12,7 +12,7 @@ function MoodSelector({ options = [], value, onChange }) {
               key={option.id}
               type="button"
               className={`mood-selector__option ${isSelected ? 'is-selected' : ''}`}
-              aria-pressed={isSelected}
+              aria-pressed={isSelected ? 'true' : 'false'}
               onClick={() => onChange?.(option.id)}
             >
               <span className="mood-selector__label">{option.label}</span>

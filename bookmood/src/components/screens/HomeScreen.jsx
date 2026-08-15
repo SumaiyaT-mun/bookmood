@@ -44,15 +44,6 @@ function HomeScreen({ onFindBook }) {
   return (
     <main className="page-shell">
       <section className="home-screen" aria-labelledby="home-title">
-        <header className="home-header">
-          <div className="brand" aria-label="BookMood home">
-            <span className="brand-mark" aria-hidden="true">
-              B
-            </span>
-            <span className="brand-name">BookMood</span>
-          </div>
-        </header>
-
         <div className="home-content">
           <p className="tagline">Find your next book by mood.</p>
 

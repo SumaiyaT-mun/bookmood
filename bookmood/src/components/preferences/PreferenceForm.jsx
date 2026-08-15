@@ -7,6 +7,7 @@ function PreferenceForm({
   genreOptions = [],
   readingPreferenceOptions = [],
   onSubmit,
+  onBack,
 }) {
   const [mood, setMood] = useState('')
   const [genre, setGenre] = useState('')
@@ -25,6 +26,12 @@ function PreferenceForm({
   return (
     <main className="page-shell">
       <section className="preferences-screen" aria-labelledby="preferences-title">
+        {onBack && (
+          <button type="button" className="secondary-button preferences-back-button" onClick={onBack}>
+            ← Back
+          </button>
+        )}
+
         <header className="preferences-header">
           <h1 id="preferences-title">Choose your reading vibe</h1>
         </header>
@@ -38,7 +45,7 @@ function PreferenceForm({
               Reading length preference
             </legend>
 
-            <div className="reading-preference-selector__options" role="radiogroup" aria-label="Reading length preferences">
+            <div className="reading-preference-selector__options" aria-label="Reading length preferences">
               {readingPreferenceOptions.map((option) => {
                 const isSelected = readingPreference === option.id
 
@@ -47,7 +54,7 @@ function PreferenceForm({
                     key={option.id}
                     type="button"
                     className={`reading-preference-selector__option ${isSelected ? 'is-selected' : ''}`}
-                    aria-pressed={isSelected}
+                    aria-pressed={isSelected ? 'true' : 'false'}
                     onClick={() => setReadingPreference(option.id)}
                   >
                     <span>{option.label}</span>

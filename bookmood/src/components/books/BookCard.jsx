@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 function BookCard({ book, onSave, isSaved = false, matchScore }) {
   if (!book) {
     return null
@@ -56,21 +58,8 @@ function BookCard({ book, onSave, isSaved = false, matchScore }) {
           </div>
         )}
 
-        <div className="book-card__header">
-          <div>
-            <h3 className="book-card__title">{book.title || 'Untitled'}</h3>
-            <p className="book-card__meta">{authorText}</p>
-          </div>
-
-          <button
-            type="button"
-            className="book-card__save"
-            aria-pressed={isSaved}
-            onClick={handleSaveClick}
-          >
-            {isSaved ? 'Saved' : 'Save'}
-          </button>
-        </div>
+        <h3 className="book-card__title">{book.title || 'Untitled'}</h3>
+        <p className="book-card__meta">{authorText}</p>
 
         <div className="book-card__details" aria-label="Book details">
           {book.publishedDate && (
@@ -100,6 +89,19 @@ function BookCard({ book, onSave, isSaved = false, matchScore }) {
         </div>
 
         <p className="book-card__description">{descriptionText}</p>
+
+        <Link to={`/books/${book.id}`} state={{ book }} className="book-card__detail-link">
+          View Details
+        </Link>
+
+        <button
+          type="button"
+          className="book-card__save"
+          aria-pressed={isSaved}
+          onClick={handleSaveClick}
+        >
+          {isSaved ? 'Saved' : 'Save'}
+        </button>
       </div>
     </article>
   )

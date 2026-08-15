@@ -3,7 +3,7 @@ function GenreSelector({ options = [], value, onChange }) {
     <fieldset className="genre-selector">
       <legend className="genre-selector__legend">Choose a genre</legend>
 
-      <div className="genre-selector__options" role="radiogroup" aria-label="Book genre options">
+      <div className="genre-selector__options" aria-label="Book genre options">
         {options.map((option) => {
           const isSelected = value === option.id
 
@@ -12,7 +12,7 @@ function GenreSelector({ options = [], value, onChange }) {
               key={option.id}
               type="button"
               className={`genre-selector__option ${isSelected ? 'is-selected' : ''}`}
-              aria-pressed={isSelected}
+              aria-pressed={isSelected ? 'true' : 'false'}
               onClick={() => onChange?.(option.id)}
             >
               {option.label}
