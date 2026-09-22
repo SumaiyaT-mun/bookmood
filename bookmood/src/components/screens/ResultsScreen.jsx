@@ -1,8 +1,14 @@
 import BookCard from '../books/BookCard'
 import useSavedBooks from '../../hooks/useSavedBooks'
 
-function ResultsScreen({ books = [], loading = false, error = '', onBack }) {
-  const { savedBooks, isSaved, saveBook, removeBook } = useSavedBooks()
+function ResultsScreen({
+  books = [],
+  loading = false,
+  error = '',
+  aiReason = '',
+  onBack,
+}) {
+  const { isSaved, saveBook, removeBook } = useSavedBooks()
 
   const handleSaveToggle = (book) => {
     if (!book?.id) {
@@ -11,31 +17,55 @@ function ResultsScreen({ books = [], loading = false, error = '', onBack }) {
 
     if (isSaved(book.id)) {
       removeBook(book.id)
-      return
+    } else {
+      saveBook(book)
     }
-
-    saveBook(book)
   }
+
   return (
     <main className="page-shell">
-      <section className="results-screen" aria-labelledby="results-title">
+      <section
+        className="results-screen"
+        aria-labelledby="results-title"
+      >
         <header className="results-header">
-          <button type="button" className="secondary-button" onClick={onBack}>
+          <button
+            type="button"
+            className="secondary-button"
+            onClick={onBack}
+          >
             Back
           </button>
 
           <div className="results-header__content">
             <p className="tagline">Your recommendations</p>
             <h1 id="results-title">Books for you</h1>
+
+            {aiReason && (
+              <p className="ai-reason" aria-live="polite">
+                ✨ AI recommendation: {aiReason}
+              </p>
+            )}
           </div>
         </header>
 
-        {loading && <p aria-live="polite">Loading recommendations...</p>}
+        {loading && (
+          <p aria-live="polite">
+            ✨ Finding books for your mood...
+          </p>
+        )}
 
         {!loading && error && (
-          <p role="alert" aria-live="assertive">
-            {error}
-          </p>
+          <div role="alert" aria-live="assertive">
+            <p>{error}</p>
+            <button
+              type="button"
+              className="secondary-button"
+              onClick={onBack}
+            >
+              Try again
+            </button>
+          </div>
         )}
 
         {!loading && !error && books.length === 0 && (
@@ -46,7 +76,10 @@ function ResultsScreen({ books = [], loading = false, error = '', onBack }) {
           <div className="results-list">
             {books.map((book) => (
               <BookCard
-                key={book.id ?? `${book.title}-${book.authors?.join('-') ?? 'unknown'}`}
+                key={
+                  book.id ??
+                  `${book.title}-${book.authors?.join('-') ?? 'unknown'}`
+                }
                 book={book}
                 onSave={handleSaveToggle}
                 isSaved={isSaved(book.id)}

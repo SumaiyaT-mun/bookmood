@@ -45,9 +45,9 @@ function HomeScreen({ onFindBook }) {
     <main className="page-shell">
       <section className="home-screen" aria-labelledby="home-title">
         <div className="home-content">
-          <p className="tagline">Find your next book by mood.</p>
+          <p className="tagline">AI-powered book recommendations</p>
 
-          <h1 id="home-title">Discover books that match how you feel.</h1>
+          <h1 id="home-title">Discover books that match how you feel</h1>
 
           <p className="description">
             Match your mood to your next great read with thoughtful recommendations,
@@ -61,7 +61,7 @@ function HomeScreen({ onFindBook }) {
               className="primary-button"
               onClick={onFindBook}
             >
-              Find My Book
+            Get AI Book Recommendations
             </button>
           </div>
 

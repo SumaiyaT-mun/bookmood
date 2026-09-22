@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 function Header() {
   const navItems = [
     { to: '/', label: 'Home' },
-    { to: '/preferences', label: 'Find My Book' },
+    { to: '/preferences', label: 'AI Book Recommendations' },
     { to: '/saved-books', label: 'Saved Books' },
   ]
 
